@@ -1,0 +1,122 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Registration" %}{% endblock %}
+
+{% block pageTitle %}{% trans "Registration" %}:&nbsp;{{ object.get_full_name|default:_("new") }}{% endblock %}
+
+{% block content %}
+
+{% if object.id > 0 %}
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#mainForm" aria-controls="mainForm" role="tab" data-toggle="tab">{% trans "Form" %}</a></li>
+    <li role="presentation"><a href="#sons" aria-controls="books" role="tab" data-toggle="tab">{% trans "Enfants" %}</a></li>
+</ul>
+{% endif %}
+<div class="tab-content">
+    <div role="tabpanel" class="row tab-pane active" id="mainForm">
+        <div class="col-sm-12">
+            {% include 'gestciv/_inc_form_edit_header.html' %}
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <form class="form-horizontal" action="" method="post" role="form">{% csrf_token %}
+                        {% include 'gestciv/_inc_form_edit_content_std.html' %}
+			{% include 'gestciv/_inc_form_gen_buttons_std.html' with generate_pe_url='gestciv:gen_pe_pdf' delete_url='gestciv:registration_delete' %}
+                    </form>
+                    {% include 'gestciv/_inc_form_edit_footer.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% if object.id > 0 %}
+    <div role="tabpanel" class="row tab-pane" id="sons">
+        <div class="col-sm-12">
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <ul>
+                    {% for birth in object.get_sons %}
+                        <li>
+                            <a href="{% url 'gestciv:birth_update' birth.id %}">
+                                {{ birth }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+
+<script> 
+    $(function() { 
+    $(".datepicker").datepicker({ 
+     changeMonth: true, 
+     changeYear: true, 
+     yearRange: "1900:2020", 
+     // You can put more options here. 
+
+    }); 
+    }); 
+    </script> 
+
+{% endblock %}
+
+
+{% block jscript %}
+<script type="text/javascript" src="/static/gestciv/layout/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/gestciv/layout/bootstrap_datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/gestciv/layout/bootstrap_datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
+<script>
+{% get_current_language as LANGUAGE_CODE %}
+$(function() {
+    $('#id_birthday).datepicker({
+      language: "{{ LANGUAGE_CODE }}",
+      autoclose: true,
+      todayHighlight: true,
+    });
+});
+
+
+function submitForm(action) {
+        $('#curForm').attr("action", action);
+        $('#curForm').submit();
+    }
+
+
+ function get_mairie_arrondissement(){
+        jQuery.ajax({
+            async: false,
+            type: "POST",
+            url: "{% url 'gestciv:get_mairie_arrondissement' %}",
+            data: "mairie_id=" + $('#id_mairie').val(),
+            success: function(response) {
+                result = JSON.parse(response);
+                if (result) {
+                    $('#id_birthcity').empty() // Use to empty the select
+                    // Now we append the sector options we've received
+                    for(var i=0;i < result.item_list.length;i++){
+                        $('#id_birthcity').append($('<option>', {
+                            value: result.item_list[i]['id'],
+                            text: result.item_list[i]['name']
+                        }));
+                    }
+
+                } else {
+                    console.log('error');
+                }
+            }
+        });
+    }
+
+    $("#id_mairie").change(function(){
+        get_mairie_arrondissement();  // AJAX function call when industry is selected
+    });
+
+</script>
+{% endblock %}
+

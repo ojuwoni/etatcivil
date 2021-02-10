@@ -1,0 +1,189 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% load tag_extras %}
+
+{% block title %}{% trans "Import des déclarations" %}{% endblock %}
+
+{% block pageTitle %}{% trans "Import des déclarations" %}{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal" action="{% url 'gestciv:birth_declaration_import' %}" method="post" role="form">{% csrf_token %}
+    <input type="hidden" name="cmd" value="search_birth" />
+    <div class="row">
+        <div class="form-group">
+            <label for="isbn_nb" class="col-sm-2 control-label">{% trans "NIP" %}</label>
+            <div class="col-sm-10">
+                <input id="birth_nb" name="birth_nb" type="text" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% if search %}
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="alert alert-danger">{{ message }}</div>
+      {% endif %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+          <div class="alert alert-success">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if birth.id %}
+    <div class="row">
+      <div class="alert alert-success">
+        <p>{% trans "This declaration" %} <a href="{% url 'gestciv:birth_update' birth.id %}">{% trans "already has certificate." %}</a></p>
+      </div>
+    </div>
+  {% else %}
+    {% if new_birth %}
+      <form class="form-horizontal" action="{% url 'gestciv:birth_declaration_import' %}" method="post" role="form">{% csrf_token %}
+        <input type="hidden" name="cmd" value="import_birth" />
+        <div class="row">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">{% trans "Declaration found" %}</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "id" %}</div>
+                  <div class="col-sm-10">{{ new_birth.id }}</div>
+                  <input type="hidden" name="id" value="{{ new_birth.id }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "NIP" %}</div>
+                  <div class="col-sm-10">{{ new_birth.nip }}</div>
+                  <input type="hidden" name="nip" value="{{ new_birth.nip }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Sexe" %}</div>
+                  <div class="col-sm-10">{{ new_birth.sex }}</div>
+                  <input type="hidden" name="sex" value="{{ new_birth.sex }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Poids à la naissance" %}</div>
+                  <div class="col-sm-10">{{ new_birth.birthweight }}</div>
+                  <input type="hidden" name="birthweight" value="{{ new_birth.birthweight }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Arrondissement de naissance" %}</div>
+                  <div class="col-sm-10">{{ new_birth.district }}</div>
+                  <input type="hidden" name="birthcountry" value="{{ new_birth.district }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Lieu de naissance" %}</div>
+                  <div class="col-sm-10">{{ new_birth.neighborhood|default:"" }}</div>
+                  <input type="hidden" name="neighborhood" value="{{ new_birth.neighborhood }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Heure de naissance" %}</div>
+                  <div class="col-sm-10">{{ new_birth.birthhour }}</div>
+                  <input type="hidden" name="birthhour" value="{{ new_birth.birthhour }}"/>
+                </div>
+              </div>
+            </div>
+
+            {% if mother %}
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    {% if mother.id %}
+                      <input name="mother_id" type="hidden" value="{{ mother.id }}" />
+                      {% trans "La mère est enregistrée dans la base de données de la commune." %}
+                    {% else %}
+                      {% trans "This mother wasn't found in the database, you will have to create it." %}
+                    {% endif %}
+                   </h3>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <div class="col-sm-2">{% trans "Nom & Prénom" %}:</div>
+                    <div class="col-sm-10">{{ mother.firstname }} {{ mother.lastname }}</div>
+                    <div class="col-sm-2">{% trans "Date de naissance:" %}:</div>
+                    <div class="col-sm-10">{{ mother.age }} ans</div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{% trans "No birth is declare in data" %}</h3>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">{% trans "Import" %}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="row">
+        <div class="col-md-12">
+          {% trans "Unknown ISBN number." %}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{% endblock %}
+
+
+{% block jscript %}
+<script src="/static/gestciv/layout/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/gestciv/layout/ajax_select/js/ajax_select.js"></script>
+<script src="/static/gestciv/layout/bootstrap_datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/gestciv/layout/bootstrap_datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
+<script>
+{% get_current_language as LANGUAGE_CODE %}
+$(function() {
+$('#id_birthday').datepicker({
+    language: "{{ LANGUAGE_CODE }}",
+    autoclose: true,
+    todayHighlight: true,
+  });
+});
+
+function get_default_arrondissement(){
+       jQuery.ajax({
+          async: false,
+           type: "POST",
+            url: "{% url 'gestciv:get_default_arrondissement' %}",
+            data: "district_id=" + $('#district_city').val(),
+            success: function(response) {
+                result = JSON.parse(response);
+                if (result) {
+                    $('#id_district').empty() // Use to empty the select
+                    // Now we append the sector options we've received
+                    for(var i=0;i < result.item_list.length;i++){
+                        $('#id_district').append($('<option>', {
+                            value: result.item_list[i]['id'],
+                            text: result.item_list[i]['name']
+                       }));
+                    }
+
+                } else {
+                    console.log('error');
+                }
+            }
+        });
+    }
+
+    $("#id_father").change(function(){
+        get_default_arrondissement();  // AJAX function call when industry is selected
+    });
+
+</script>
+{% endblock %}

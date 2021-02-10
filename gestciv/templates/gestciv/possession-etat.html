@@ -1,0 +1,23 @@
+<h2 style="text-align: center;">REPUBLIQUE DU BENIN</h2>
+<h2 style="text-align: center;">DEPARTEMENT DE L'ATLANTIQUE</h2>
+<h2 style="text-align: center;">COMMUNE {{ mairie.nom }}</h2>
+<h2 style="text-align: center;">ARRONDISSEMENT {{ person.district }}</h2>
+<h2 style="text-align: center;">QUARTIER {{ quartier.nom }}</h2>
+<h1 style="text-align: center;"><strong>CERTIFICAT DE POSSESSION D'ETAT</strong></h1>
+<p style="text-align: center;">N&deg;:</p>
+<p style="text-align: justify;">Je soussign&eacute; {{ quartier.cq }}</p>
+<p style="text-align: justify;">Chef quartier certifie que {{article}} nomm&eacute;{{terminaison}} {{ person.lastname }} {{ person.firstname }}, n&eacute;{{terminaison}} le {{ person.birthday }}, de {{person.father_name }} et de {{ person.mother_name }} r&eacute;side dans mon quartier depuis le {{person.arrived_date}}.</p>
+<p style="text-align: justify;">Maison {{person.street_type}} {{person.comp_1}}, t&eacute;l&eacute;phone {{person.phone|default:"inconnu"}} {{article}} nomm&eacute;{{terminaison}} d&eacute;clare exercer la profession de {{ person.job }} et parle couramment la langue nationale {{person.ethnie|default:"aucune"}}.</p>
+<p style="text-align: justify;">Je {{article}} consid&egrave;re comme b&eacute;ninois{{terminaison}}, {{pronom}} peut &ecirc;tre retrouv&eacute;{{terminaison}} &agrave; tout moment par le nomm&eacute;{{terminaison}} {{person.ice.firstname}} {{person.ice.lastname}} t&eacute;l&eacute;phone {person.ice.phone}}</p>
+<p style="text-align: justify;">&nbsp;En foi de quoi, je lui d&eacute;livre le pr&eacute;sent certificat pour servir et valoir ce que de droit</p>
+<table border="1">
+<tbody>
+<tr>
+<td>
+<p style="text-align: justify;">Abomey-calavi le, {{ current_date}}</p>
+<br /> <br /> <br /> <br />
+<p style="text-align: justify;">Le chef quartier</p>
+</td>
+</tr>
+</tbody>
+</table>

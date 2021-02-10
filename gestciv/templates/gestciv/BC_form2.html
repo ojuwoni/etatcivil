@@ -1,0 +1,52 @@
+{% extends 'gestciv/base_tpl.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+    <h3> <span class="glyphicon glyphicon-file"></span>Acte de Naissance à partir d'un numéro unique</align> </h3>
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+form > input {
+	width:20%;
+    }
+
+    form {
+        list-style: none;
+    }
+
+</style>
+
+    <!-- ############### -->
+    <!-- Page principale -->
+    <!-- ############### -->
+
+            <form class = "form" method="GET" action=""> 
+
+                <h4> Numéro unique de l'individu : </h4>
+
+                <input type="text"  name="social_number" placeholder="N° de déclaration" value="{{request.GET.social_number}}">&nbsp;
+
+                <h4> Nom de famille du père et de la mère : </h4>
+
+                <input type="text"  name="social_number_father" placeholder="N° identifiant personnel du père" value="{{ request.GET.social_number_father }}">&nbsp;
+                <input type="text"  name="social_number_mother" placeholder="N° identifiant personnel de la mère" value="{{ request.GET.social_number_mother }}">&nbsp;
+                <input class="button" type="submit" value="Valider">
+
+                <br></br>
+
+            </form>
+
+            <form class = "form" method='POST' action=''> {% csrf_token %}
+                <br></br>
+                {{ form.as_p}} <!-- Display child part formulary -->
+                <br></br>
+
+                <input class="button" type ="submit" value="Valider l'acte de naissance" /> 
+            </form>
+
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% block title %}{{ TOWN_HALL }}{% endblock %}
+
+{% block pageTitle %}{% trans "Extrat d'acte de naissane de " %} {{ birth.firstname }} {{ birth.father.lastname }} {% endblock %}
+
+{% block content %}
+
+
+<table style="height: 21px; width: 559px;">
+<tbody>
+<tr style="height: 81px;">
+<td style="width: 190.117px; height: 81px;">
+<h3><strong>R&eacute;publique du B&eacute;nin</strong></h3>
+<h4><strong>D&eacute;partement du Litoral</strong></h4>
+<h4><strong>Commune de Cotonou</strong></h4>
+<p>&nbsp;</p>
+</td>
+<td style="width: 348.883px; height: 81px;"><span style="text-decoration: underline;"><strong>EXTRAIT DU REGISTRE DE L'ETAT CIVIL</strong></span>
+<h4 style="text-align: center;"><strong>Volet N&deg;1 (A remettre au d&eacute;clarant)</strong></h4>
+<h4 style="text-align: center;"><strong>EXTRAIT D'ACTE DE NAISSANCE</strong></h4>
+<p style="text-align: center;"><strong>Mairie de Calavi</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">&nbsp;</div>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">Je soussign&eacute;(e): {{ birth }}</div>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">Fonction : {{ fonction }}</div>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">Certifie avoir re&ccedil;u la d&eacute;claration de naissance de</div>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">Pr&eacute;nom de l'enfant: {{birth.firstname }}</div>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">Sexe : {{ birth.sex }}</div>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">&nbsp;</div>
+<div class="t m0 x0 h8 yd ff4 fs1 fc0 sc0 ls0 ws0">
+<div class="t m0 x0 h8 y13 ff1 fs1 fc0 sc0 ls0 ws0"><strong>P&egrave;re</strong></div>
+<div class="t m0 x0 h8 y14 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Nom</span> <span class="ff4">: {{ birth.father.lastname}} </span></div>
+<div class="t m0 x0 h8 y15 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Pr&eacute;noms : {{ birth.father.firstname }} </span></div>
+<div class="t m0 x0 h8 y16 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">&Acirc;ge: {{ birth.father.birthday }}</span></div>
+<div class="t m0 x0 h8 y17 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Profession: {{ birth.father.job }}</span></div>
+<div class="t m0 x0 h8 y18 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Domicile: {{ birth.father.address }} {{ birth.father.city }}</span></div>
+<div class="t m0 x0 h8 y19 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;">&nbsp;</div>
+<div class="t m0 x0 h4 y1a ff1 fs1 fc0 sc0 ls0 ws0"><strong>M&egrave;re</strong></div>
+<div class="t m0 x0 h8 y1b ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Nom</span> <span class="ff4">: {{ birth.mother.lastname }} </span></div>
+<div class="t m0 x0 h8 y1c ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Pr&eacute;noms M&egrave;re: {{ birth.mother.firstname }} </span></div>
+<div class="t m0 x0 h8 y1d ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Age: {{ birth.mother.birthday }}</span></div>
+<div class="t m0 x0 h8 y1e ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Profession: {{ birth.mother.job }}</span></div>
+<div class="t m0 x0 h8 y1f ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Domicile : {{ birth.mother.address }}  {{ birth.father.city }}</span></div>
+<div class="t m0 x0 h8 y1f ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;">&nbsp;</div>
+<div class="t m0 x0 h8 y20 ff1 fs1 fc0 sc0 ls0 ws0"><strong>D&eacute;clarant</strong></div>
+<div class="t m0 x0 h8 y21 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Nom</span> <span class="ff4">:</span></div>
+<div class="t m0 x0 h8 y22 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Pr&eacute;nom</span> <span class="ff4">: </span></div>
+<div class="t m0 x0 h8 y23 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">&Acirc;ge</span> <span class="ff4">:</span></div>
+<div class="t m0 x0 h8 y24 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Profession</span> <span class="ff4">:</span></div>
+<div class="t m0 x0 h8 y25 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;"><span class="ff4">Domicile : </span></div>
+<div class="t m0 x0 h8 y26 ff3 fs1 fc0 sc0 ls0 ws0" style="padding-left: 30px;">&nbsp;</div>
+<div class="t m0 x0 h8 y27 ff3 fs1 fc0 sc0 ls0 ws0">&nbsp;</div>
+<div class="t m0 x0 h8 y28 ff3 fs1 fc0 sc0 ls0 ws0">&nbsp;</div>
+<div class="t m0 x0 h8 y29 ff4 fs1 fc0 sc0 ls0 ws0">Date et heure de la naissance:</div>
+<div class="t m0 x0 h8 y2a ff4 fs1 fc0 sc0 ls0 ws0">Lieu de la naissance</div>
+<div class="t m0 x0 h8 y2b ff4 fs1 fc0 sc0 ls0 ws0">Date de la d&eacute;claration</div>
+<div class="t m0 x0 h8 y2c ff3 fs1 fc0 sc0 ls0 ws0">&nbsp;</div>
+<div class="t m0 x0 h8 y2d ff4 fs1 fc0 sc0 ls0 ws0">Copie conforme au</div>
+<div class="t m0 x0 h7 y2e ff4 fs1 fc0 sc0 ls0 ws0">Cotonou le</div>
+<div class="t m0 x0 h7 y2f ff3 fs0 fc0 sc0 ls0 ws0">&nbsp;</div>
+<div class="t m0 x0 h7 y30 ff4 fs1 fc0 sc0 ls0 ws0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; LE {{ maire }} Signature et cachet de l'officier de l'&eacute;tat civil</div>
+</div>
+<div class="t m0 x0 h8 y11 ff4 fs1 fc0 sc0 ls0 ws0">&nbsp;</div>
+</body>
+
+{% endblock %}

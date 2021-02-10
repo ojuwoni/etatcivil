@@ -1,0 +1,263 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+{% load tag_extras %}
+
+{% block title %}{% trans "Declaration de décès" %}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/gestciv/layout/ajax_select/css/ajax_select.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.structure.min.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.theme.min.css" />
+{% endblock %}
+
+{% block pageTitle %}{% trans "Declaration de décès" %}:&nbsp;{{ object.firstname|default:_("Nouveau") }} {% endblock %}
+
+{% block content %}
+
+{% if object.id > 0 %}
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#mainForm" aria-controls="mainForm" role="tab" data-toggle="tab">{% trans "Frères" %}</a></li>
+    <li role="presentation"><a href="#father" aria-controls="father" role="tab" data-toggle="tab">{% trans "Père" %}</a></li>
+    <li role="presentation"><a href="#mother" aria-controls="mother" role="tab" data-toggle="tab">{% trans "Mère" %}</a></li>
+</ul>
+<div class="row">&nbsp;</div>
+{% endif %}
+<div class="tab-content">
+    <div role="tabpanel" class="row tab-pane active" id="mainForm">
+        <div class="row">
+            <div class="col-sm-12">
+            {% if object.id > 0 %}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% trans "Nouvelle déclaration" %}
+                            <a href="{% url 'gestciv:nbirth_add' object.id %}" title="{% trans 'Add' %}">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                        {% for brother in brothers_list %}
+                            <li>
+                                <a href="{% url 'gestciv:nbirth_update' brother.id %}">
+                                    {% if brother.can_be_issued %}
+                                        <del>{% trans "Frère" %} {{ brother.id }} {{ brother.sex }} {{ brother.birthday }}</del>&nbsp;({% trans "Remove" %})
+                                    {% else %}
+                                        {% trans "Sample" %} {{ brother }}
+                                    {% endif %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% include 'gestciv/_inc_form_edit_header.html' %}
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        {% if object.id > 0 %}
+                            <form id="curForm" class="form-horizontal" enctype="multipart/form-data" action="" method="post" role="form">{% csrf_token %}
+                        {% else %}
+                            {# We have to explicitely set the 'action' value because we can come from the isbn import view #}
+                            {# In this case if we don't put it it will reload the import isbn view #}
+                            <form id="curForm" class="form-horizontal" enctype="multipart/form-data" action="{% url 'gestciv:nbirth_add' %}" method="post" role="form">{% csrf_token %}
+                        {% endif %}
+
+			<div class="form-group">
+				<label for="{{ form.person.id_for_label }}" class="col-sm-2 control-label {{ form.person.css_classes }}">
+                                        {{ form.person.label }}
+                                        <a href="javascript:submitForm('{% url 'gestciv:save_mother_form_to_session' 'gestciv:registration_add' %}')" title="{% trans 'Add' %}">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                        </a>
+                                </label>
+
+                                <div class="col-sm-4">
+                                        {{ form.person|addcss:"form-control" }}
+                                        {% if form.person.errors %}
+                                                <div class="text-danger">{{ form.person.errors }}</div>
+                                        {% endif %}
+                                </div>
+				<label for="{{ form.eventlocation.id_for_label }}" class="col-sm-2 control-label
+                                                {{ form.eventlocation.css_classes }}">{{ form.eventlocation.label }}</label>
+                                <div class="col-sm-4">
+                                    {{ form.eventlocation|addcss:"form-control" }}
+                                    {% if form.eventlocation.errors %}
+                                        <div class="text-danger">{{ form.eventlocation.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+			</div>
+			<div class="form-group">
+
+				<label for="{{ form.reglocation.id_for_label }}" class="col-sm-2 control-label
+                                                {{ form.reglocation.css_classes }}">{{ form.reglocation.label }}</label>
+                                <div class="col-sm-4">
+                                    {{ form.reglocation|addcss:"form-control" }}
+                                    {% if form.reglocation.errors %}
+                                        <div class="text-danger">{{ form.reglocation.errors }}</div>
+                                    {% endif %}
+                                </div>
+				<label for="{{ form.cause.id_for_label }}" class="col-sm-2 control-label
+                                                {{ form.cause.css_classes }}">{{ form.cause.label }}</label>
+                                <div class="col-sm-4">
+                                    {{ form.cause|addcss:"form-control" }}
+                                    {% if form.cause.errors %}
+                                        <div class="text-danger">{{ form.cause.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                         </div>
+
+			<div class="form-group">
+
+                                <label for="{{ form.deathday.id_for_label }}" class="col-sm-2 control-label
+                                                {{ form.deathday.css_classes }}">{{ form.deathday.label }}</label>
+                                <div class="col-sm-4">
+                                    {{ form.deathday }}
+                                    {% if form.deathday.errors %}
+                                        <div class="text-danger">{{ form.deathday.errors }}</div>
+                                    {% endif %}
+                                </div>
+				<label for="{{ form.certifier.id_for_label }}" class="col-sm-2 control-label
+						{{ form.certifier.css_classes }}">{{ form.certifier.label }}</label>
+				<div class="col-sm-4">
+				    {{ form.certifier|addcss:"form-control" }}
+				    {% if form.certifier.errors %}
+					<div class="text-danger">{{ form.certifier.errors }}</div>
+				    {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+                            {% if book.has_copies %}
+                                {% include 'gestciv/_inc_form_edit_buttons_std.html' %}
+                            {% else %} {% comment %}Only allow book deletion if there are no copies linked to it{% endcomment %}
+                                {% comment %} {% include 'gestciv/_inc_form_edit_buttons_std.html' with delete_url='gestciv:birth_delete' %}{% endcomment %}
+				{% include 'gestciv/_inc_form_gen_buttons_std.html' with generate_ec_url='gestciv:gen_ec_pdf' delete_url='gestciv:birth_delete' %}
+                            {% endif %}
+                        </form>
+                        {% include 'gestciv/_inc_form_edit_footer.html' %}
+                    </div>
+                </div>
+            </div><!-- /.col-sm- -->
+        </div><!-- end row -->
+    </div>
+
+    {% if object.id > 0 %}
+    <div class="row">&nbsp;</div>
+    <div role="tabpanel" class="row tab-pane" id="father">
+        <div class="col-sm-12">
+              <!-- {% for the_father in object.father.all %} -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% trans "le père de " %} <a href="{% url 'gestciv:registration_update' object.father.id %}">{{ object.father.lastname }}</a></h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                        {% for birth in father.birth_set.all %}
+                            {% if birth.id != object.id %}
+                                <li>
+                                    <a href="{% url 'gestciv:book_update' birth.id %}">{{ birth }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            <!--{% endfor %} -->
+        </div>
+    </div>
+    {% endif %}
+
+    {% if object.id > 0 %}
+    <div role="tabpanel" class="row tab-pane" id="mother">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{% trans "Date de naissance" %}</th>
+                        <th>{% trans "Prénom" %}</th>
+                        <th>{% trans "Sexe" %}</th>
+                        <th>{% trans "Poids" %}</th>
+                        <th>{% trans "Ville" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for child in brothers_list %}
+                   {% if child.is_late %}
+                        <tr class="bg-warning">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                            <td><a href="{% url 'gestciv:birth_update' child.id %}">{{ child.birthday|date:"SHORT_DATE_FORMAT" }}</a></td>
+                            <td><a href="{% url 'gestciv:birth_update' child.id %}">{{ child.nip }}</td>
+			    {% if child.sex == 'M' %}
+				    <td>Masculin</td>
+			    {% else %}
+				    <td>Féminin</td>
+			    {% endif %}
+                            <td>{{ child.birthweight }} Kg</td>
+                            <td>{{ child.birthcity }}</td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div> <!-- end div class tab-content-->
+
+{% endblock %}
+
+{% block jscript %}
+<script src="/static/gestciv/layout/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/gestciv/layout/ajax_select/js/ajax_select.js"></script>
+<script>
+    function submitForm(action) {
+        $('#curForm').attr("action", action);
+        $('#curForm').submit();
+    }
+
+
+ function get_mairie_arrondissement(){
+        jQuery.ajax({
+            async: false,
+            type: "POST",
+            url: "{% url 'gestciv:get_mairie_arrondissement' %}",
+            data: "city_id=" + $('#id_city').val(),
+            success: function(response) {
+                result = JSON.parse(response);
+                if (result) {
+                    $('#id_district').empty() // Use to empty the select
+                    // Now we append the sector options we've received
+                    for(var i=0;i < result.item_list.length;i++){
+                        $('#id_district').append($('<option>', {
+                            value: result.item_list[i]['id'],
+                            text: result.item_list[i]['name']
+                        }));
+                    }
+
+                } else {
+                    console.log('error');
+                }
+            }
+        });
+    }
+
+    $("#id_city").change(function(){
+        get_mairie_arrondissement();  // AJAX function call when industry is selected
+    });
+
+</script>
+{% endblock %}

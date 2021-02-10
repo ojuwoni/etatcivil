@@ -1,0 +1,39 @@
+<HTML>
+<BODY>
+<h2 style="text-align: center; color: #000000;"><span style="text-decoration: underline;"><span style="border-bottom: 4px solid #c82828;">REPUBLIQUE DU BENIN<br /></span></span></h2>
+<h2 style="text-align: center; color: #000000;"><span style="text-decoration: underline;">DEPARTEMENT DE L'ATLANTIQUE</span></h2>
+<h2 style="text-align: center; color: #000000;"><span style="text-decoration: underline;">COMMUNE {{ mairie.nom }}</span></h2>
+<h2 style="text-align: center; color: #000000;"><span style="text-decoration: underline;">ARRONDISSEMENT {{ person.district }}</span></h2>
+<h2 style="text-align: center; color: #000000;"><span style="text-decoration: underline;">QUARTIER {{ quartier.nom }}</span></h2>
+<p><span style="text-decoration: underline;"></span></p>
+<h1 style="text-align: center;"><strong><span style="text-decoration: underline;">CERTIFICAT DE POSSESSION D'ETAT</span></strong></h1>
+<p style="text-align: center;">N&deg;:</p>
+<p style="text-align: left;">Je soussign&eacute;&nbsp;  {{ quartier.cq }}</p>
+<p style="text-align: left;">Chef quartier&nbsp;            certifie que {{article}} nomm&eacute;{{terminaison}} {{ person.lastname }} {{ person.firstname }}, n&eacute;{{terminaison}} le&nbsp; {{ person.birthday }}</p>
+<p style="text-align: left;">de {{person.father_name }} et de {{ person.mother_name }}&nbsp; r&eacute;side dans mon quartier depuis le {{person.arrived_date}}.</p>
+<p style="text-align: left;">Maison {{person.street_type}} {{person.comp_1}}, &nbsp; t&eacute;l&eacute;phone&nbsp;{{person.phone|default:"inconnu"}} {{article}} nommé{{terminaison}} d&eacute;clare 
+<p style="text-align: left;">exercer la profession de {{ person.job }} et parle couramment la langue nationale</p> {{person.ethnie|default:"aucune"}}.</p>
+<p style="text-align: left;">Je {{article}} consid&egrave;re comme b&eacute;ninois{{terminaison}}, {{pronom}} peut &ecirc;tre retrouv&eacute;{{terminaison}} &agrave; tout moment</p>
+<p style="text-align: left;"> par le&nbsp; nomm&eacute;{{terminaison}} {{person.ice.firstname}} {{person.ice.lastname}}  t&eacute;l&eacute;phone&nbsp; {{person.ice.phone}}</p>
+<p style="text-align: left;"></p>
+<p style="text-align: left;">En foi de quoi, je lui d&eacute;livre le pr&eacute;sent certificat pour servir et valoir ce que de droit</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tr>
+<td style="width: 23.9837%;"></td>
+<td style="width: 76.0163%;">
+<p>&nbsp;                                                                    Abomey-calavi le, {{ current_date}}</p>
+<br/>
+<br/>
+<br/>
+<br/>
+<p>&nbsp;                                                                    Le chef quartier</p>
+<p></p>
+<p></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p></p>
+</BODY>
+</HTML>

@@ -1,0 +1,119 @@
+<HTML>
+	<HEAD> 
+		<LINK rel=stylesheet type="text/css" href="styles.css">
+		
+
+
+	</HEAD>	
+	<style>
+		.pub{  margin-left: 50%;
+                margin-top:20px;
+		 color: black; font-size: 20px; font-weight: bold;
+		}
+
+		.volet{
+			 margin-left: 50%; top:0%;
+			font-size: 15px; font-weight: bold;
+
+		}
+		.extrait{
+			margin-left: 50%;
+
+			}
+		.mairie{
+			 margin-left: 51%; margin-top:1%;
+			font-size: 20px;
+		}
+		.cote{
+			position:absolute; top:20px; left:10px;
+			font-size:20px ; font-weight: bold;
+		  }
+
+		 #bloc{
+			  margin-top:4%;
+			margin-left:2%;
+		}
+
+
+		.conc{
+
+			margin-top:20px ;
+			margin-left:50%;
+		}
+	</style>
+	<BODY>
+		<div>
+			<div class="pub">EXTRAIT DU REGISTRE DE L'ETAT CIVIL</div> 
+			<div class="volet"> <h4>Volet N <sup>o</sup>1 (A remettre au d&eacute;clarant) </h4> </div>
+			<div class="extrait">EXTRAIT D'ACTE DE NAISSANCE</div>
+			<div class="mairie">Mairie de Calavi</div>
+		
+		
+			<div class="cote" >
+				R&eacute;publique du B&eacute;nin <br/>
+				<div style=margin-top:5px font-size:10px font-weight:bold >D&eacute;partement du Litoral </div> 
+				<div style=margin-top:4px>Commune de Calavi </div><br/>
+			</div>
+		</div>
+		
+		
+		
+		<div>
+			<div id="bloc">		
+				Je soussign&eacute;(e): {{ mairie.nom_maire }} <br/>
+				Fonction :  Maire <br/>
+				Certifie avoir re&ccedil;u la d&eacute;claration de naissance de<br/>
+				Pr&eacute;nom de l'enfant: {{ birth.firstname }} <br/>
+				Sexe : {{ birth.sex }} <br/>
+				 
+				<div style=margin-top:17px;><b>P&egrave;re</b></div>
+				Nom : {{ birth.father.lastname }} <br/>
+				Prénoms : {{ birth.father.firstname }}<br/>
+				Né le: {{ birth.father.birthday }}<br/>
+				Profession: {{ birth.father.job }} <br/>
+				Domicile: {{ birth.father.address }} {{ birth.father.city }}  <br/>
+				 
+				<div style=margin-top:17px;><b>M&egrave;re</b></div>
+				Nom : {{ birth.mother.firstname }} <br/>
+				Pr&eacute;noms M&egrave;re: {{ birth.mother.lastname }} <br/>
+				Né le: {{ birth.mother.birthday }}     <br/>
+				Profession: {{ birth.mother.job }}   <br/>
+				Domicile : {{ birth.mother.address }} {{birth.mother.city }}  <br/>
+				 
+				<div style=margin-top:17px;><b>D&eacute;clarant</b></div>
+				Nom : {{ birth.declarant.lastname }}<br/>
+				Prénom :{{ birth.declarant.firstname }}<br/>
+				Âge :  {{ birth.declarant.birthday }}<br/>
+				Profession :  {{ birth.declarant.job }}<br/>
+				Domicile :  {{ birth.declarant.address }} {{ birth.declarant.city }}<br/>
+				 
+				 
+				 
+				<div style=margin-left:12%;>
+					<br/>
+					<br/>
+					Date et heure de la naissance: {{ birth.birthday }} à {{ birth.birthhour }}<br/>
+					Lieu de la naissance :    {{ birth.birthcity }}<br/>
+					Date de la d&eacute;claration  <br/>
+				</div>
+				 
+			</div>
+				<br/>
+			<div style=margin-left:110px;>
+			Copie conforme au.... <br/>
+				{{ mairie.nom }} le
+			</div>
+					<div class="conc">
+                    Signature et cachet de l'officier de l'état civil
+					</div>
+		</div>
+	</ BODY> 
+
+</HTML> 
+
+
+
+
+
+
+

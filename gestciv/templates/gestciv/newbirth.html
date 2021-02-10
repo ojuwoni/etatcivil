@@ -1,0 +1,25 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+{% load tag_extras %}
+
+{% block title %}{% trans "Déclaration de naissance" %}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/gestciv/layout/ajax_select/css/ajax_select.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.structure.min.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.theme.min.css" />
+{% endblock %}
+
+{% block pageTitle %}{% trans "Déclaration de naissance" %}:&nbsp;{{ object.title|default:_("new") }}{% endblock %}
+
+{% block content %}
+
+<h1>Déclaration de naissance</h1>
+<form action="" method="post">
+{{ form.as_p }}
+<p>
+	<input type="submit" value="Ajouter" />
+</p>
+</form>
+{% endblock %}

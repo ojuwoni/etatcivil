@@ -1,0 +1,49 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% block title %}Liste des naissances{% endblock %}
+
+{% block pageTitle %}Liste des naissances{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal" action="{% url 'gestciv:birth_add' %}" method="post" role="form">{% csrf_token %}
+    {% include 'gestciv/_inc_form_search_std.html' %}
+</form>
+
+<div class="row-fluid">
+    <div class="span12">
+        {% include 'gestciv/_inc_paginator_list.html' %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><a href="{% url 'gestciv:birth_add'%}?order_field=nip">{% trans "Référence" %}</a></th>
+                    <th>Prénom</th>
+                    <th>{% trans "Mère" %}</th>
+                    <th>{% trans "Sexe" %}</th>
+                    <th>{% trans "Date de naissance" %}</th>
+                    <th>{% trans "Lieu de naissance" %}</th>
+                    <th>{% trans "Type de naissance" %}</th>
+                    <th>{% trans "Déclarer avant" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for birth in object_list %}
+                <tr>
+                    <td><a href="{% url 'gestciv:nbirth_update' birth.id %}">{{ birth.nip }}</a></td>
+                    <td>{{ birth.firstname }}</td>
+                    <td>{{ birth.mother.lastname }} {{ birth.mother.firstname}}</td>
+                    <td>{{ birth.sex }}</td>
+                    <td>{{ birth.birthday}}</td>
+                    <td>{{ birth.district }} {{ birth.neighborhood}}</td>
+                    <td>{{ birth.birthtype }}</td>
+                    <td>{{ birth.bcduedate|date:"SHORT_DATE_FORMAT" }}</td>
+                </tr>
+            {% empty %}
+                    <tr><td colspan="5">{% trans "No birth." %}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

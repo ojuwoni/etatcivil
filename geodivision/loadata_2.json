@@ -1,0 +1,838 @@
+[
+        {
+            "model": "geodivision.mairie",
+            "pk": 1,
+            "fields": {
+                "c_com": "0101",
+                "departement": 1,
+                "nom": "KANDI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 2,
+            "fields": {
+                "c_com": "0102",
+                "departement": 1,
+                "nom": "MALANVILLE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 3,
+            "fields": {
+                "c_com": "0103",
+                "departement": 1,
+                "nom": "KARIMAMA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 4,
+            "fields": {
+                "c_com": "0104",
+                "departement": 1,
+                "nom": "BANIKOARA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 5,
+            "fields": {
+                "c_com": "0105",
+                "departement": 1,
+                "nom": "GOGOUNOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 6,
+            "fields": {
+                "c_com": "0106",
+                "departement": 1,
+                "nom": "SEGBANA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 7,
+            "fields": {
+                "c_com": "0201",
+                "departement": 2,
+                "nom": "BOUKOUMBE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 8,
+            "fields": {
+                "c_com": "0202",
+                "departement": 2,
+                "nom": "COBLY",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 9,
+            "fields": {
+                "c_com": "0203",
+                "departement": 2,
+                "nom": "MATERI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 10,
+            "fields": {
+                "c_com": "0204",
+                "departement": 2,
+                "nom": "TANGUIETA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 11,
+            "fields": {
+                "c_com": "0205",
+                "departement": 2,
+                "nom": "KEROU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 12,
+            "fields": {
+                "c_com": "0206",
+                "departement": 2,
+                "nom": "KOUANDE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 13,
+            "fields": {
+                "c_com": "0207",
+                "departement": 2,
+                "nom": "NATITINGOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 14,
+            "fields": {
+                "c_com": "0208",
+                "departement": 2,
+                "nom": "OUASSA-PEHUNCO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 15,
+            "fields": {
+                "c_com": "0209",
+                "departement": 2,
+                "nom": "TOUKOUNTOUNA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 16,
+            "fields": {
+                "c_com": "0301",
+                "departement": 3,
+                "nom": "ALLADA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 17,
+            "fields": {
+                "c_com": "0302",
+                "departement": 3,
+                "nom": "KPOMASSE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 18,
+            "fields": {
+                "c_com": "0303",
+                "departement": 3,
+                "nom": "OUIDAH",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 19,
+            "fields": {
+                "c_com": "0304",
+                "departement": 3,
+                "nom": "TOFFO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 20,
+            "fields": {
+                "c_com": "0305",
+                "departement": 3,
+                "nom": "TORI-BOSSITO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 21,
+            "fields": {
+                "c_com": "0306",
+                "departement": 3,
+                "nom": "ABOMEY-CALAVI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 22,
+            "fields": {
+                "c_com": "0307",
+                "departement": 3,
+                "nom": "SO-AVA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 23,
+            "fields": {
+                "c_com": "0308",
+                "departement": 3,
+                "nom": "ZE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 24,
+            "fields": {
+                "c_com": "0401",
+                "departement": 4,
+                "nom": "BEMBEREKE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 25,
+            "fields": {
+                "c_com": "0402",
+                "departement": 4,
+                "nom": "NIKKI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 26,
+            "fields": {
+                "c_com": "0403",
+                "departement": 4,
+                "nom": "SINENDE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 27,
+            "fields": {
+                "c_com": "0404",
+                "departement": 4,
+                "nom": "KALALE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 28,
+            "fields": {
+                "c_com": "0405",
+                "departement": 4,
+                "nom": "PARAKOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 29,
+            "fields": {
+                "c_com": "0406",
+                "departement": 4,
+                "nom": "N'DALI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 30,
+            "fields": {
+                "c_com": "0407",
+                "departement": 4,
+                "nom": "PERERE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 31,
+            "fields": {
+                "c_com": "0408",
+                "departement": 4,
+                "nom": "TCHAOUROU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 32,
+            "fields": {
+                "c_com": "0501",
+                "departement": 5,
+                "nom": "BANTE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 33,
+            "fields": {
+                "c_com": "0502",
+                "departement": 5,
+                "nom": "DASSA-ZOUME",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 34,
+            "fields": {
+                "c_com": "0503",
+                "departement": 5,
+                "nom": "SAVALOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 35,
+            "fields": {
+                "c_com": "0504",
+                "departement": 5,
+                "nom": "GLAZOUE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 36,
+            "fields": {
+                "c_com": "0505",
+                "departement": 5,
+                "nom": "OUESSE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 37,
+            "fields": {
+                "c_com": "0506",
+                "departement": 5,
+                "nom": "SAVE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 38,
+            "fields": {
+                "c_com": "0601",
+                "departement": 6,
+                "nom": "APLAHOUE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 39,
+            "fields": {
+                "c_com": "0602",
+                "departement": 6,
+                "nom": "DJAKOTOMEY",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 40,
+            "fields": {
+                "c_com": "0603",
+                "departement": 6,
+                "nom": "KLOUEKANMEY",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 41,
+            "fields": {
+                "c_com": "0604",
+                "departement": 6,
+                "nom": "DOGBO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 42,
+            "fields": {
+                "c_com": "0605",
+                "departement": 6,
+                "nom": "LALO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 43,
+            "fields": {
+                "c_com": "0606",
+                "departement": 6,
+                "nom": "TOVIKLIN",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 44,
+            "fields": {
+                "c_com": "0701",
+                "departement": 7,
+                "nom": "DJOUGOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 45,
+            "fields": {
+                "c_com": "0702",
+                "departement": 7,
+                "nom": "BASSILA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 46,
+            "fields": {
+                "c_com": "0703",
+                "departement": 7,
+                "nom": "COPARGO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 47,
+            "fields": {
+                "c_com": "0704",
+                "departement": 7,
+                "nom": "OUAKE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 48,
+            "fields": {
+                "c_com": "0801",
+                "departement": 8,
+                "nom": "COTONOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 49,
+            "fields": {
+                "c_com": "0901",
+                "departement": 9,
+                "nom": "ATHIEME",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 50,
+            "fields": {
+                "c_com": "0902",
+                "departement": 9,
+                "nom": "COME",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 51,
+            "fields": {
+                "c_com": "0903",
+                "departement": 9,
+                "nom": "GRAND-POPO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 52,
+            "fields": {
+                "c_com": "0904",
+                "departement": 9,
+                "nom": "BOPA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 53,
+            "fields": {
+                "c_com": "0905",
+                "departement": 9,
+                "nom": "LOKOSSA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 54,
+            "fields": {
+                "c_com": "1001",
+                "departement": 10,
+                "nom": "PORTO-NOVO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 55,
+            "fields": {
+                "c_com": "1002",
+                "departement": 10,
+                "nom": "ADJARRA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 56,
+            "fields": {
+                "c_com": "1003",
+                "departement": 10,
+                "nom": "AGUEGUES",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 57,
+            "fields": {
+                "c_com": "1004",
+                "departement": 10,
+                "nom": "SEME-PODJI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 58,
+            "fields": {
+                "c_com": "1005",
+                "departement": 10,
+                "nom": "ADJOHOUN",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 59,
+            "fields": {
+                "c_com": "1006",
+                "departement": 10,
+                "nom": "AKPRO-MISSERETE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 60,
+            "fields": {
+                "c_com": "1007",
+                "departement": 10,
+                "nom": "AVRANKOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 61,
+            "fields": {
+                "c_com": "1008",
+                "departement": 10,
+                "nom": "BONOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 62,
+            "fields": {
+                "c_com": "1009",
+                "departement": 10,
+                "nom": "DANGBO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 63,
+            "fields": {
+                "c_com": "1101",
+                "departement": 11,
+                "nom": "ADJA-OUERE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 64,
+            "fields": {
+                "c_com": "1102",
+                "departement": 11,
+                "nom": "IFANGNI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 65,
+            "fields": {
+                "c_com": "1103",
+                "departement": 11,
+                "nom": "SAKETE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 66,
+            "fields": {
+                "c_com": "1104",
+                "departement": 11,
+                "nom": "KETOU",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 67,
+            "fields": {
+                "c_com": "1105",
+                "departement": 11,
+                "nom": "POBE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 68,
+            "fields": {
+                "c_com": "1201",
+                "departement": 12,
+                "nom": "ABOMEY",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 69,
+            "fields": {
+                "c_com": "1202",
+                "departement": 12,
+                "nom": "AGBANGNIZOUN",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 70,
+            "fields": {
+                "c_com": "1203",
+                "departement": 12,
+                "nom": "BOHICON",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 71,
+            "fields": {
+                "c_com": "1204",
+                "departement": 12,
+                "nom": "DJIDJA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 72,
+            "fields": {
+                "c_com": "1205",
+                "departement": 12,
+                "nom": "COVE",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 73,
+            "fields": {
+                "c_com": "1206",
+                "departement": 12,
+                "nom": "OUINHI",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 74,
+            "fields": {
+                "c_com": "1207",
+                "departement": 12,
+                "nom": "ZAGNANADO",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 75,
+            "fields": {
+                "c_com": "1208",
+                "departement": 12,
+                "nom": "ZA-KPOTA",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        },
+        {
+            "model": "geodivision.mairie",
+            "pk": 76,
+            "fields": {
+                "c_com": "1209",
+                "departement": 12,
+                "nom": "ZOGBODOMEY",
+                "adresse":  null,
+                "is_default": "False"
+            }
+        }
+]

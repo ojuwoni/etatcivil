@@ -1,0 +1,149 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% load tag_extras %}
+
+{% block title %}{% trans "Processus d'adoption" %}{% endblock %}
+
+{% block pageTitle %}{% trans "Processus d'adoption" %}{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal" action="{% url 'gestciv:new_adoption' %}" method="post" role="form">{% csrf_token %}
+    <input type="hidden" name="cmd" value="search_child" />
+    <div class="row">
+        <div class="form-group">
+            <label for="isbn_nb" class="col-sm-2 control-label">{% trans "NIP" %}</label>
+            <div class="col-sm-10">
+                <input id="child_nb" name="child_nb" type="text" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% if search %}
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="alert alert-danger">{{ message }}</div>
+      {% endif %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+          <div class="alert alert-success">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if birth.id %}
+    <div class="row">
+      <div class="alert alert-success">
+        <p>{% trans "This declaration" %} <a href="{% url 'gestciv:birth_update' birth.id %}">{% trans "already has certificate." %}</a></p>
+      </div>
+    </div>
+  {% else %}
+    {% if new_birth %}
+      <form class="form-horizontal" action="{% url 'gestciv:birth_declaration_import' %}" method="post" role="form">{% csrf_token %}
+        <input type="hidden" name="cmd" value="import_birth" />
+        <div class="row">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">{% trans "Declaration found" %}</h3>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "id" %}</div>
+                  <div class="col-sm-10">{{ new_birth.id }}</div>
+                  <input type="hidden" name="id" value="{{ new_birth.id }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "NIP" %}</div>
+                  <div class="col-sm-10">{{ new_birth.nip }}</div>
+                  <input type="hidden" name="nip" value="{{ new_birth.nip }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Mother" %}</div>
+                  <div class="col-sm-10">{{ mother_firstname }} {{ mother_lastname }}</div>
+                  <input type="hidden" name="mother" value="{{ mother_firstname }} {{ mother_lastname }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Sex" %}</div>
+                  <div class="col-sm-10">{{ new_birth.sex }}</div>
+                  <input type="hidden" name="sex" value="{{ new_birth.sex }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Birth weigth" %}</div>
+                  <div class="col-sm-10">{{ new_birth.birthweight }}</div>
+                  <input type="hidden" name="birthweight" value="{{ new_birth.birthweight }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Birth country" %}</div>
+                  <div class="col-sm-10">{{ new_birth.birthcountry }}</div>
+                  <input type="hidden" name="birthcountry" value="{{ new_birth.birthcountry }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Birth city" %}</div>
+                  <div class="col-sm-10">{{ new_birth.birthcity|default:"" }}</div>
+                  <input type="hidden" name="city" value="{{ new_birth.birthcity }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "Birth hour" %}</div>
+                  <div class="col-sm-10">{{ new_birth.birthhour }}</div>
+                  <input type="hidden" name="birthhour" value="{{ new_birth.birthhour }}"/>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2">{% trans "mother birthday" %}</div>
+                  <div class="col-sm-10">{{ mother_birthday|default:"" }}</div>
+                  <input type="hidden" name="mother_birthday" value="{{ mother_birthday }}"/>
+                </div>
+              </div>
+            </div>
+
+            {% if mother %}
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    {% if mother.id %}
+                      <input name="mother_id" type="hidden" value="{{ mother.id }}" />
+                      {% trans "This mother already exists, it will be linked to the birth." %}
+                    {% else %}
+                      {% trans "This mother wasn't found in the database, you will have to create it." %}
+                    {% endif %}
+                   </h3>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <div class="col-sm-2">{% trans "Name" %}:</div>
+                    <div class="col-sm-10">{{ mother.firstname }} {{ mother.lastname }}</div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{% trans "No birth is declare in data" %}</h3>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">{% trans "Import" %}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="row">
+        <div class="col-md-12">
+          {% trans "Unknown ISBN number." %}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,8 @@
+from adaptor.model import CsvModel
+class MyCSvModel(CsvModel):
+    name = CharField()
+   age = IntegerField()
+   length = FloatField()
+
+   class Meta:
+      delimiter = ";"

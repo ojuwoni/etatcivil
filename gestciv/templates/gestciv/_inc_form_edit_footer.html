@@ -1,0 +1,7 @@
+{% load i18n %}
+{% if form.instance.id > 0 %}
+  <div>{% trans "Created on" %} {{ form.instance.created_on }} {% trans "by" %} {{ form.instance.created_by.get_full_name }}</div>
+  {% if form.instance.modified_by %}
+    <div>{% trans "Updated on" %} {{ form.instance.modified_on }} {% trans "by" %} {{ form.instance.modified_by.get_full_name }}</div>
+  {% endif %}
+{% endif %}

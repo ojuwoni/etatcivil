@@ -1,0 +1,18 @@
+{% load i18n %}
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+	{% if form.instance.id > 0 and generate_ec_url %}
+	<a class="btn btn-primary" href="{% url generate_ec_url form.instance.id %}">{% trans "Acte de naissance" %}</a>
+	{% endif %}
+        {% if form.instance.id > 0 and generate_pe_url %}
+            <a class="btn btn-info" href="{% url generate_pe_url form.instance.id %}">{% trans "Possession état" %}</a>
+        {% endif %}
+        {% if form.instance.id > 0 and generate_ar_url %}
+            <a class="btn btn-info" href="{% url generate_ar_url form.instance.id %}">{% trans "Attestation rés." %}</a>
+        {% endif %}
+        {% if form.instance.id > 0 and delete_url %}
+            <a class="btn btn-danger" href="{% url delete_url form.instance.id %}">{% trans "Delete" %}</a>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,33 @@
+.pub{  margin-left: 40%;
+		margin-top:20px;
+         color: black; font-size: 24px; font-weight: bold;
+	}
+		 
+.volet{
+	 margin-left: 47%; top:0%;
+         
+}
+.extrait{
+margin-left: 47%; 
+         
+}
+.mairie{
+ margin-left: 51%; margin-top:1%;
+font-size: 20px;
+}
+.cote{
+position:absolute; top:81px; left:40px;
+        font-size:20px ;
+	  }
+	  
+ #bloc{
+  margin-top:4%;
+	margin-left:10%;
+}
+
+
+.conc{
+
+margin-top:20px	;
+margin-left:50%;
+}

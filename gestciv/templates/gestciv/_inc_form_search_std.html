@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Recherche d'une fiche" %}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            {% for field in search_form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
+                <div class="col-sm-10">
+                    {{ field }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-11">
+                    <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

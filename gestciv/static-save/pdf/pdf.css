@@ -1,0 +1,177 @@
+#content .image img {
+  max-height: 3in;
+}
+
+#title-page-logo-image {
+  margin-top: 0pt;
+  max-height: 400px;
+}
+
+@page title-page {
+  margins: 75pt 30pt 50pt 30pt;
+  background-color: red;
+}
+
+#table-of-contents {
+  page-break-before: right;
+}
+
+@page title-page {
+  margin: 0pt;
+  @bottom {
+    content: none;
+  }
+}
+
+#title-page-logo-image {
+  margin: 0pt;
+  max-height: 11in;
+}
+
+.table-of-contents-title {
+  content: 'Customized Table of Contents';
+}
+
+.screensteps-textblock.screensteps-wrapper--alert {
+  font-size: 10pt;
+}
+
+.chapter-tofc {
+  page-break-after: avoid;
+}
+
+.article-tofc + .article-tofc {
+  page-break-before: avoid;
+}
+
+#title-page-title-text::after {
+  content: '\AThis comes after the title';
+  white-space: pre;
+}
+
+#content .chapter {
+  page-break-before: left;
+}
+
+#content .chapter {
+  page-break-after: avoid;
+  display: block;
+  height: auto;
+}
+
+#content .chapter-title {
+  position: relative;
+  transform: none;
+  top: inherit;
+  left: inherit;
+}
+
+#content .chapter + .article {
+  page-break-before: avoid;
+}
+
+#content .chapter {
+  display: none;
+}
+
+/* Since chapters no longer have pages don't add page numbers to chapter entries in the T of C. */
+#table-of-contents a::after {
+  content: '';
+}
+
+#table-of-contents .article-tofc a::after {
+  content: leader(".") target-counter(attr(href), page);
+}
+
+#content .chapter-title {
+  vertical-align: top;
+  padding-top: 75mm;
+}
+
+#content .article-title {
+  text-align: center;
+}
+
+.header-text {
+  text-align: right;
+}
+
+#header .logo {
+  max-height: 25pt;
+}
+
+screensteps-section.screensteps-depth-1 ~ .screensteps-section.screensteps-depth-1 {
+   page-break-before: always; 
+}
+
+.screensteps-textblock {
+  text-align:justify;
+}
+
+li:nth-child(n+2) {
+  margin-top: 2em;
+}
+
+#title-page-title-text {
+  font-variant: normal;
+}
+
+.article {
+  page-break-before: auto;
+}
+
+#content .chapter {
+  page-break-before: always;
+}
+
+.chapter-title {
+  string-set: chapter-title content()
+}
+
+.header-text {
+  content: string(chapter-title)
+}
+
+div > p:not(:last-child){
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+div > p:last-child {
+  margin-top: 0px;
+}
+
+.screensteps-textblock {
+  float: left;
+  max-width: 473pt;
+}
+
+.screensteps-image {
+  max-width: 250pt;
+  float: right;
+}
+
+.screensteps-section {
+  clear: both;
+}
+
+.footer {
+  ...
+}
+
+.footer-text { 
+  ...
+}
+
+.chapter-title {
+  string-set: chapter-title content()
+}
+
+.article-title {
+  string-set: article-title content()
+}
+
+
+.header-text {
+  content: string(chapter-title) " " string(article-title);
+}

@@ -1,0 +1,110 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Statistics for borrowings" %}{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="/static/gestciv/layout/bootstrap_datepicker/css/bootstrap-datepicker3.css">
+{% endblock %}
+
+{% block pageTitle %}{% trans "Population statistics" %}{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal" action="{% url 'gestciv:statistic_registration' %}" method="post" role="form">{% csrf_token %}
+  {% include 'gestciv/_inc_form_search_std.html' %}
+</form>
+
+<div class="text-danger">{{ search_form.non_field_errors }}</div>
+
+{% if statistics %}
+  <div class="card">
+    <div class="card-header">
+      <h3>
+        {% trans "Year" %} : {{ statistics.year }}<br/>
+        {% trans "Number of borrowings for this period" %}: {{ statistics.num_borrowings }}
+      </h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td><b>{% trans "Categories" %}</b></td>
+            <td>
+              <table class="table table-striped">
+                <tbody>
+                  {% for cat_name, cat_values in statistics.category.items %}
+                    <tr>
+                      <td>
+                        <b>{{ cat_name }}</b>:&nbsp;{{ cat_values.all.count }}&nbsp;({{ cat_values.all.percent }} %)
+                        {% if cat_values.sub_cats.items %}
+                          -
+                          {% for sub_cat, sub_cat_num in cat_values.sub_cats.items %}
+                            <i>{{ sub_cat }}</i>: {{ sub_cat_num }}
+                          {% endfor %}
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Audience" %}</b></td>
+            <td>
+              {% for audience, value in statistics.audience.items %}
+                <b>{{ audience }}</b>: {{ value.count }} ({{ value.percent }} %)
+              {% endfor %}
+            </td>
+          </tr>
+          <tr>
+            <td><b>{% trans "Age Slices" %}</b></td>
+            <td>
+              <table class="table table-striped">
+                <thead>
+                  <th>{% trans "Slice" %}</th>
+                  <th>{% trans "Females" %}</th>
+                  <th>{% trans "Males" %}</th>
+                  <th>{% trans "Total" %}</th>
+                </thead>
+                <tbody>
+                  {% for slice_id, slice_content in statistics.age_slices.items %}
+                    <tr>
+                      <td width="15%"><b>{{ slice_content.label }}</b></td>
+                      <td>{{ slice_content.gender.f.count }}</td>
+                      <td>{{ slice_content.gender.m.count }}</td>
+                      <td>{{ slice_content.count }} ({{ slice_content.percent }} %)</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
+
+{% endblock %}
+
+{% block jscript %}
+<script src="/static/gestciv/layout/bootstrap_datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/gestciv/layout/bootstrap_datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
+<script>
+{% get_current_language as LANGUAGE_CODE %}
+$(function() {
+  $('#id_from_date').datepicker({
+    language: "{{ LANGUAGE_CODE }}",
+    autoclose: true,
+  });
+
+  $('#id_to_date').datepicker({
+    language: "{{ LANGUAGE_CODE }}",
+    autoclose: true,
+    todayHighlight: true,
+  });
+});
+</script>
+{% endblock %}

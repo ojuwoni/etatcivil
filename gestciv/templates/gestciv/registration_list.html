@@ -1,0 +1,51 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Lieste des administrés" %}{% endblock %}
+
+{% block pageTitle %}{% trans "Liste des administrés" %}{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal" action="{% url 'gestciv:registration_list' %}" method="post" role="form">{% csrf_token %}
+    {% include 'gestciv/_inc_form_search_std.html' %}
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        {% include 'gestciv/_inc_paginator_list.html' %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=lastname">{% trans "Nom" %}</a></th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=firstname">{% trans "Prénom" %}</a></th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=birthday">Age</th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=sex">Sexe</th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=sex">Situation Matri.</th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=city">{% trans "Type rue" %}</a></th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=district">{% trans "Adresse" %}</a></th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=created_on">{% trans "Date d'arrivée" %}</a></th>
+                    <th><a href="{% url 'gestciv:registration_list' %}?order_field=created_on">{% trans "Enregistré le" %}</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in object_list %}
+                <tr>
+                    <td><a href="{% url 'gestciv:registration_update' person.id %}">{{ person.lastname }}</a></td>
+                    <td>{{ person.firstname|default:"" }}</td>
+                    <td>{{ person.age }}</td>
+                    <td>{{ person.sex }}</td>
+                    <td>{{ person.is_single }}</td>
+                    <td>{{ person.street_type }}</td>
+                    <td>{{ person.comp_1 }}</td>
+                    <td>{{ person.arrived_date }}</td>
+                    <td>{{ person.created_on }}</td>
+                </tr>
+                {% empty %}
+                    <tr><td colspan="3">{% trans "Pas d'administré." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

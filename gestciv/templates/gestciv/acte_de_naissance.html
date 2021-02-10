@@ -1,0 +1,79 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% block title %}{{ TOWN_HALL }}{% endblock %}
+
+{% block pageTitle %}{% trans "Extrat d'acte de naissane de " %} {{ birth.firstname }} {{ birth.father.lastname }} {% endblock %}
+
+{% block content %}
+
+
+
+		<div class="pub">EXTRAIT DU REGISTRE DE L'ETAT CIVIL</div> 
+		<div class="volet"> <h4>Volet N <sup>o</sup>1 (A remettre au d&eacute;clarant) </h4> </div>
+		<div class="extrait">EXTRAIT D'ACTE DE NAISSANCE</div>
+		<div class="mairie">Mairie de Calavi</div>
+		
+		
+		<div class="cote" >
+			R&eacute;publique du B&eacute;nin <br/>
+			<div style=margin-top:5px>D&eacute;partement {{birth.departement }} </div> 
+			<div style=margin-top:4px>Commune de {{birth.commune }} <div/><br/>
+		</div>
+		
+		
+		
+		<div>
+			<div id="bloc">		
+				Je soussign&eacute;(e): {{birth.arrondissement.responsable }} <br/>
+				Fonction : {{birth.arrondissement.titre }}<br/>
+				Certifie avoir re&ccedil;u la d&eacute;claration de naissance de<br/>
+				Pr&eacute;nom de l'enfant: {{birth.firstname }} <br/>
+				Sexe : {{birth.sex }} <br/>
+				 
+				<div style=margin-top:17px;><b>P&egrave;re</b></div>
+				Nom : {{birth.father.lastname }} <br/>
+				Prénoms : {{birth.father.firstname }}<br/>
+				Né le: {{birth.father.birthday }}<br/>
+				Profession: {{birth.father.job }} <br/>
+				Domicile: {{birth.father.address }} {{birth.father.city }} <br/>
+				 
+				<div style=margin-top:17px;><b>M&egrave;re</b></div>
+				Nom : {{birth.mother.lastname }} <br/>
+				Pr&eacute;noms M&egrave;re: {{birth.mother.firstname }} <br/>
+				Né le: {{birth.mother.birthday }}     <br/>
+				Profession: {{birth.mother.job }}   <br/>
+				Domicile : {{birth.mother.address }} {{birth.mother.city }} <br/>
+				 
+				<div style=margin-top:17px;><b>D&eacute;clarant</b></div>
+				Nom : <br/>
+				Prénom :<br/>
+				Âge :  <br/>
+				Profession :  <br/>
+				Domicile :  <br/>
+				 
+				 
+				 
+				<div style=margin-left:12%;>
+					Date et heure de la naissance: <br/>
+					Lieu de la naissance   <br/>
+					Date de la d&eacute;claration  <br/>
+				</div>
+				 
+			</div>
+				<br/>
+			<div style=margin-left:0px;>
+			Copie conforme au.... <br/>
+				Cotonou le
+			</div>
+					<div class="conc">
+                    Signature et cachet de l'officier de l'état civil
+					</div>
+		</div>
+{% endblock %}
+
+
+
+
+
+

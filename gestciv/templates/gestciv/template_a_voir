@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<h2 align="center"> ACTE DE NAISSANCE </align> </h2>
+
+{% block content %} 
+
+<h3 align = "right"> Acte de Naissance n° {{birthcertificate.id}} </align> </h3>
+
+<h3> Informations concernant l'enfant : </h3>
+<li> Nom de l'enfant : {{birthcertificate.lastname}}</li>
+<li>Prénom(s) de l'enfant : {{birthcertificate.firstname}}</li>
+<li>Est né(e) à : {{birthcertificate.birthcity}}</li>
+<li>Le : {{birthcertificate.birthday}} à {{birthcertificate.birthhour}}</li>
+<li>De sexe : {{birthcertificate.sex}}</li>
+
+<hr width = "50%"></hr>
+
+<h3> Informations concernant le père : </h3>
+<li>Fils ou fille du nommé : {{birthcertificate.fk_parent1.lastname}} {{birthcertificate.fk_parent1.firstname}}</li> <!-- Get only firstname and lastname element -->
+<li>Né le : {{birthcertificate.fk_parent1.birthday}}</li> <!-- Get only birthday element -->
+<li>A : {{birthcertificate.fk_parent1.birthcity}}</li> <!-- Get only birthcity element -->
+<li>De nationalité : {{birthcertificate.fk_parent1.nationality}}</li> <!-- Get only nationality element -->
+<li>Domicilié au : {{birthcertificate.fk_parent1.adress}}</li> 
+<li>A : {{birthcertificate.fk_parent1.city}} ({{birthcertificate.fk_parent1.zip}}) - {{birthcertificate.fk_parent1.country}}</li> <!-- Get only adress, zip, city, country element -->
+<li>Exerçant la profession de : {{birthcertificate.fk_parent1.job}}</li> <!-- Get only job element -->
+
+<hr width = "50%"></hr>
+
+<h3> Informations concernant la mère : </h3>
+<li>Fils ou fille de la nommée : {{birthcertificate.fk_parent2.lastname}} {{birthcertificate.fk_parent2.firstname}}</li> <!-- Get only firstname and lastname element -->
+<li>Née le : {{birthcertificate.fk_parent2.birthday}}</li> <!-- Get only birthday element -->
+<li>A : {{birthcertificate.fk_parent2.birthcity}}</li> <!-- Get only birthcity element -->
+<li>De nationalité : {{birthcertificate.fk_parent2.nationality}}</li> <!-- Get only nationality element -->
+<li>Domiciliée au : {{birthcertificate.fk_parent2.adress}}</li> 
+<li>A : {{birthcertificate.fk_parent2.city}} ({{birthcertificate.fk_parent2.zip}}) - {{birthcertificate.fk_parent2.country}}</li> 
+<li>Exerçant la profession de : {{birthcertificate.fk_parent2.job}}</li> <!-- Get only job element -->
+
+<br></br>
+
+<h3> Par la présente, l'Officier d'Etat Civil certifie la sincérité de la présente déclaration </h3>
+
+<h3 align = "right"> L'Officier d'Etat Civil </align> </h3>
+<h3 align = "right"> Signature et tampon </align> </h3>
+
+{% endblock %}

@@ -1,0 +1,321 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+{% load tag_extras %}
+
+{% block title %}{% trans "Acte de naissance" %}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/gestciv/layout/ajax_select/css/ajax_select.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.structure.min.css" />
+    <link rel="stylesheet" href="/static/gestciv/layout/jquery-ui/jquery-ui.theme.min.css" />
+{% endblock %}
+
+{% block pageTitle %}{% trans "Déclaration de naissance" %}:&nbsp;{{ object.firstname|default:_("Nouveau") }} {% endblock %}
+
+{% block content %}
+
+{% if object.id > 0 %}
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#mainForm" aria-controls="mainForm" role="tab" data-toggle="tab">{% trans "Enfant" %}</a></li>
+    <li role="presentation"><a href="#father" aria-controls="father" role="tab" data-toggle="tab">{% trans "Père" %}</a></li>
+    <li role="presentation"><a href="#mother" aria-controls="mother" role="tab" data-toggle="tab">{% trans "Mère" %}</a></li>
+</ul>
+<div class="row">&nbsp;</div>
+{% endif %}
+<div class="tab-content">
+    <div role="tabpanel" class="row tab-pane active" id="mainForm">
+        <div class="row">
+            <div class="col-sm-12">
+            {% if object.id > 0 %}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% trans "Nouveau" %}
+                            <a href="{% url 'gestciv:birth_add' object.id %}" title="{% trans 'Add' %}">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                        {% for birth in birth_list %}
+                            <li>
+                                <a href="{% url 'gestciv:birth_update' birth.id %}">
+                                    {% if bookcopy.is_disabled %}
+                                        <del>{% trans "Sample" %} {{ bookcopy }}</del>&nbsp;({% trans "Remove" %})
+                                    {% else %}
+                                        {% trans "Sample" %} {{ bookcopy }}
+                                    {% endif %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% include 'gestciv/_inc_form_edit_header.html' %}
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        {% if object.id > 0 %}
+                            <form id="curForm" class="form-horizontal" enctype="multipart/form-data" action="" method="post" role="form">{% csrf_token %}
+                        {% else %}
+                            {# We have to explicitely set the 'action' value because we can come from the isbn import view #}
+                            {# In this case if we don't put it it will reload the import isbn view #}
+                            <form id="curForm" class="form-horizontal" enctype="multipart/form-data" action="{% url 'gestciv:birth_add' %}" method="post" role="form">{% csrf_token %}
+                        {% endif %}
+                            <div class="form-group">
+
+				<label for="{{ form.nip.id_for_label }}" class="col-sm-2 control-label {{ form.nip.css_classes }}">
+                                            {{ form.nip.label }}
+				    <a href="javascript:submitForm('{% url 'gestciv:search_for_new_birth' 'gestciv:nbirth_list' %}' ) " title="{% trans 'Search' %}">
+					<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				    </a>
+				</label>
+
+				<div class="col-sm-4">
+				    {{ form.nip|addcss:"form-control" }}
+				    {% if form.nip.errors %}
+					<div class="text-danger">{{ form.nip.errors }}</div>
+				    {% endif %}
+				</div>
+				<label for="{{ form.firstname.id_for_label }}" class="col-sm-2 control-label
+                                                {{ form.firstname.css_classes }}"> {{ form.firstname.label }}</label>
+                                <div class="col-sm-4">
+                                    {{ form.firstname|addcss:"form-control" }}
+                                    {% if form.firstname.errors %}
+                                        <div class="text-danger">{{ form.firstname.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+			</div>
+
+                            <div class="form-group">
+				<label for="{{ form.father.id_for_label }}" class="col-sm-2 control-label {{ form.father.css_classes }}">
+				    {{ form.father.label }}
+				    <a href="javascript:submitForm('{% url 'gestciv:save_father_form_to_session' 'gestciv:registration_add' %}')" title="{% trans 'Add' %}">
+					<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				    </a>
+				</label>
+					<div class="col-sm-4">
+					    {{ form.father|addcss:"form-control" }}
+					    {% if form.father.errors %}
+						<div class="text-danger">{{ form.father.errors }}</div>
+					    {% endif %}
+					</div>
+
+				<label for="{{ form.mother.id_for_label }}" class="col-sm-2 control-label {{ form.mother.css_classes }}">
+				    {{ form.mother.label }}
+				    <a href="javascript:submitForm('{% url 'gestciv:save_mother_form_to_session' 'gestciv:registration_add' %}')" title="{% trans 'Add' %}">
+					<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				    </a>
+				</label>
+					<div class="col-sm-4">
+					    {{ form.mother|addcss:"form-control" }}
+					    {% if form.mother.errors %}
+						<div class="text-danger">{{ form.mother.errors }}</div>
+					    {% endif %}
+					</div>
+                            </div>
+
+                            <div class="form-group">
+				<label for="{{ form.birthweight.id_for_label }}" class="col-sm-2 control-label 
+						{{ form.birthweight.css_classes }}"> {{ form.birthweight.label }}</label>
+				<div class="col-sm-4">
+				    {{ form.birthweight|addcss:"form-control" }}
+				    {% if form.birthweight.errors %}
+					<div class="text-danger">{{ form.birthweight.errors }}</div>
+				    {% endif %}
+				</div>
+
+				<label for="{{ form.sex.id_for_label }}" class="col-sm-2 control-label 
+						{{ form.sex.css_classes }}">{{ form.sex.label }}</label>
+				<div class="col-sm-4">
+				    {{ form.sex }}
+				    {% if form.sex.errors %}
+					<div class="text-danger">{{ form.sex.errors }}</div>
+				    {% endif %}
+				</div>
+			    </div>
+
+			    <div class="form-group">
+				<label for="{{ form.birthday.id_for_label }}" class="col-sm-2 control-label 
+					{{ form.birthday.css_classes }}">{{ form.birthday.label }}</label>
+				<div class="col-sm-4">
+				    {{ form.birthday|addcss:"form-control" }}
+				    {% if form.birthday.errors %}
+					<div class="text-danger">{{ form.birthday.errors }}</div>
+				    {% endif %}
+				</div>
+				<label for="{{ form.birthhour.id_for_label }}" class="col-sm-2 control-label 
+					{{ form.birthhour.css_classes }}">{{ form.birthhour.label }}</label>
+				<div class="col-sm-4">
+				    {{ form.birthhour|addcss:"form-control" }}
+				    {% if form.birthhour.errors %}
+					<div class="text-danger">{{ form.birthhour.errors }}</div>
+				    {% endif %}
+				</div>
+                            </div>
+
+                            <div class="form-group">
+				<label for="{{ form.district.id_for_label }}" class="col-sm-2 control-label 
+					{{ form.district.css_classes }}">{{ form.district.label }}</label>
+				<div class="col-sm-4">
+				    {{ form.district|addcss:"form-control" }}
+				    {% if form.district.errors %}
+					<div class="text-danger">{{ form.district.errors }}</div>
+				    {% endif %}
+				</div>
+				<label for="{{ form.neighborhood.id_for_label }}" class="col-sm-2 control-label 
+						{{ form.neighborhood.css_classes }}">{{ form.neighborhood.label }}</label>
+				<div class="col-sm-4">
+				    {{ form.neighborhood|addcss:"form-control" }}
+				    {% if form.neighborhood.errors %}
+					<div class="text-danger">{{ form.neighborhood.errors }}</div>
+				    {% endif %}
+				</div>
+			    </div>
+
+                            <div class="form-group">
+				<label for="{{ form.declarant.id_for_label }}" class="col-sm-2 control-label 
+					{{ form.declarant.css_classes }}"> {{ form.declarant.label }}
+				    <a href="javascript:submitForm('{% url 'gestciv:save_father_form_to_session' 
+					'gestciv:registration_add' %}')" title="{% trans 'Add' %}">
+					<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				    </a>
+				</label>
+
+				<div class="col-sm-4">
+				    {{ form.declarant|addcss:"form-control" }}
+				    {% if form.declarant.errors %}
+					<div class="text-danger">{{ form.declarant.errors }}</div>
+				    {% endif %}
+				</div>
+                            </div>
+		</div>
+      </div>
+
+                            {% if book.has_copies %}
+                                {% include 'gestciv/_inc_form_edit_buttons_std.html' %}
+                            {% else %} {% comment %}Only allow book deletion if there are no copies linked to it{% endcomment %}
+                                {% comment %} {% include 'gestciv/_inc_form_edit_buttons_std.html' with delete_url='gestciv:birth_delete' %}{% endcomment %}
+				{% include 'gestciv/_inc_form_gen_buttons_std.html' with generate_ec_url='gestciv:gen_ec_pdf' delete_url='gestciv:birth_delete' %}
+                            {% endif %}
+                        </form>
+                        {% include 'gestciv/_inc_form_edit_footer.html' %}
+                    </div>
+                </div>
+            </div><!-- /.col-sm- -->
+        </div><!-- end row -->
+    </div>
+
+    {% if object.id > 0 %}
+    <div class="row">&nbsp;</div>
+    <div role="tabpanel" class="row tab-pane" id="father">
+        <div class="col-sm-12">
+              <!-- {% for the_father in object.father.all %} -->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% trans "le père de " %} <a href="{% url 'gestciv:registration_update' object.father.id %}">{{ object.father.lastname }}</a></h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                        {% for birth in father.birth_set.all %}
+                            {% if birth.id != object.id %}
+                                <li>
+                                    <a href="{% url 'gestciv:book_update' birth.id %}">{{ birth }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            <!--{% endfor %} -->
+        </div>
+    </div>
+    {% endif %}
+
+    {% if object.id > 0 %}
+    <div role="tabpanel" class="row tab-pane" id="mother">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{% trans "Date de naissance" %}</th>
+                        <th>{% trans "Prénom" %}</th>
+                        <th>{% trans "Sexe" %}</th>
+                        <th>{% trans "Poids" %}</th>
+                        <th>{% trans "Lieu de naissance" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for child in mother_child_list %}
+                   {% if child.is_late %}
+                        <tr class="bg-warning">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                            <td><a href="{% url 'gestciv:birth_update' child.id %}">{{ child.birthday|date:"SHORT_DATE_FORMAT" }}</a></td>
+                            <td><a href="{% url 'gestciv:birth_update' child.id %}">{{ child.firstname }}</td>
+			    {% if child.sex == 'M' %}
+				    <td>Masculin</td>
+			    {% else %}
+				    <td>Féminin</td>
+			    {% endif %}
+                            <td>{{ child.birthweight }} Kg</td>
+                            <td>{{child.district}} {{ child.neighborhood }}</td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div> <!-- end div class tab-content-->
+
+{% endblock %}
+
+{% block jscript %}
+<script src="/static/gestciv/layout/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/gestciv/layout/ajax_select/js/ajax_select.js"></script>
+<script>
+    function submitForm(action) {
+        $('#curForm').attr("action", action);
+        $('#curForm').submit();
+    }
+
+
+function get_arrondissement_quartier(){
+        jQuery.ajax({
+            async: false,
+            type: "POST",
+            url: "{% url 'gestciv:get_arrondissement_quartier' %}",
+            data: "district_id=" + $('#id_district').val(),
+            success: function(response) {
+                result = JSON.parse(response);
+                if (result) {
+                    $('#id_neighborhood').empty() // Use to empty the select
+                    // Now we append the sector options we've received
+                    for(var i=0;i < result.item_list.length;i++){
+                        $('#id_neighborhood').append($('<option>', {
+                            value: result.item_list[i]['id'],
+                            text: result.item_list[i]['name']
+                        }));
+                    }
+
+                } else {
+                    console.log('error');
+                }
+            }
+        });
+    }
+
+    $("#id_district").change(function(){
+        get_arrondissement_quartier();  // AJAX function call when industry is selected
+    });
+</script>
+{% endblock %}

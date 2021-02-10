@@ -1,0 +1,141 @@
+{% load i18n %}
+{% load static %}
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Etat Civil">
+        <meta name="author" content="YAYI Olabiyi Patrick">
+        <!--link rel="icon" href="../../favicon.ico" -->
+      
+        <title>{% block title %}Idadu Tech - {{ EREGISTER_NAME }}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'gestciv/layout/bootstrap/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'gestciv/layout/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'gestciv/layout/font-awesome/css/all.min.css' %}">
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Static navbar -->
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'gestciv:home' %}">{% trans "Home" %}</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Maternité<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'gestciv:nbirth_add' %}">{% trans "Déclaration de naissance" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_declaration_import' %}">{% trans "Importer une déclaration" %}</a></li>
+                                    <li><a href="{% url 'gestciv:nbirth_list' %}">{% trans "Liste des naissances" %}</a></li>
+                            <!--        <li><a href="{% url 'gestciv:nbirth_list' 'late' %}">{% trans "Mariage" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_add' 'late' %}">{% trans "Divorce" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_list' 'current' %}">{% trans "Décès" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_list' %}">{% trans "Enfant sans vie" %}</a></li>
+                                    <li><a href="{% url 'gestciv:nbirth_list' %}">{% trans "Recherche naissance" %}</a></li> -->
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Les actes" %}<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'gestciv:birth_list' %}">{% trans "Acte de mariage" %}</a></li>
+                                    <li><a href="{% url 'gestciv:death_add' %}">{% trans "Declaration de décès" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_list' %}">{% trans "Acte de naissance" %}</a></li>
+                                    <li><a href="{% url 'gestciv:death_declaration' %}">{% trans "Acte de décès" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_list' %}">{% trans "Autorisation parentale" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_list' %}">{% trans "Livret de famille" %}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+			<ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Vie du quartier" %}<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'gestciv:registration_add' %}">{% trans "Enregistrer administrté" %}</a></li>
+                                    <li><a href="{% url 'gestciv:registration_list' %}">{% trans "Recherche administrté" %}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Statistiques" %}<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'gestciv:statistics_birth' %}">{% trans "Tables annuelles" %}</a></li>
+                                    <li><a href="{% url 'gestciv:statistics_registration' %}">{% trans "Tables décennales" %}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Configuration" %}<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'gestciv:dept_add' %}">{% trans "Département" %}</a></li>
+                                    <li><a href="{% url 'gestciv:birth_list' %}">{% trans "Liste des paramètres" %}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'gestciv:logout' %}">{% trans "Log out" %} {{ user.first_name }}</a>
+                            {% else %}
+                                <a href="{% url 'gestciv:login' %}">{% trans "Log in" %}</a>
+                            {% endif %}
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/admin">{% trans "Administration" %}</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "History" %}<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    {% for item in request.session.user_nav_list %}
+                                        <li><a href="{{ item.0 }}">{{ item.1 }}</a></li>
+                                     {% empty %}
+                                        <li>{% trans "Empty" %}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </div>
+          
+            <div class="container">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{% block pageTitle %}Etat Civil{% endblock %}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container -->
+        <div align="center">
+            Idadu Tech - Licence GNU GPLv3 - {{ VERSION|safe }} - {{ LIBRARY_NAME }}
+        </div>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="{% static 'gestciv/layout/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'gestciv/layout/bootstrap/js/bootstrap.min.js' %}"></script>
+        {% block jscript %}{% endblock %}
+    </body>
+</html>

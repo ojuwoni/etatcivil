@@ -1,0 +1,93 @@
+{% extends 'gestciv/base_tpl.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Statistics for births" %}{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="/static/gestciv/layout/bootstrap_datepicker/css/bootstrap-datepicker3.css">
+{% endblock %}
+
+{% block pageTitle %}{% trans "Statistics for births" %}{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal" action="{% url 'gestciv:statistics_birth' %}" method="post" role="form">{% csrf_token %}
+  {% include 'gestciv/_inc_form_search_std.html' %}
+</form>
+
+<div class="text-danger">{{ search_form.non_field_errors }}</div>
+
+{% if statistics %}
+  <div class="card">
+    <div class="card-header">
+        <h3 class="panel-title">
+            {% trans "Year" %} : {{ statistics.year }}<br/>
+            {% trans "Number of active readers for this period" %}: {{ statistics.num_active_readers }} -&nbsp;
+            {% trans "Number of new readers for this period" %}: {{ statistics.num_new_readers }}
+        </h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td><b>{% trans "Age Slices" %}</b></td>
+            <td>
+              <table class="table table-striped">
+                <thead>
+                  <th>{% trans "Slice" %}</th>
+                  <th>{% trans "Females" %}</th>
+                  <th>{% trans "Males" %}</th>
+                  <th>{% trans "Total" %}</th>
+                  <th>{% trans "Residents" %}</th>
+                  <th>{% trans "Non Residents" %}</th>
+                </thead>
+                <tbody>
+                  {% for slice_id, slice_content in statistics.age_slices.items %}
+                    <tr>
+                      <td width="15%"><b>{{ slice_content.label }}</b></td>
+                      <td>{{ slice_content.gender.f.count }}</td>
+                      <td>{{ slice_content.gender.m.count }}</td>
+                      <td>{{ slice_content.count }} ({{ slice_content.percent }} %)</td>
+                      <td>{{ slice_content.resident.count }}</td>
+                      <td>{{ slice_content.non_resident.count }}</td>
+                    </tr>
+                  {% endfor %}
+                  <tr>
+                    <td><b>{% trans "Total" %}</b></td>
+                    <td>{{ statistics.num_readers.f }}</td>
+                    <td>{{ statistics.num_readers.m }}</td>
+                    <td>{{ statistics.num_readers.total }}</td>
+                    <td>{{ statistics.num_readers.resident }}</td>
+                    <td>{{ statistics.num_readers.non_resident }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
+
+{% endblock %}
+
+{% block jscript %}
+<script src="/static/gestciv/layout/bootstrap_datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/gestciv/layout/bootstrap_datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
+<script>
+{% get_current_language as LANGUAGE_CODE %}
+$(function() {
+    $('#id_from_date').datepicker({
+      language: "{{ LANGUAGE_CODE }}",
+      autoclose: true,
+    });
+
+    $('#id_to_date').datepicker({
+      language: "{{ LANGUAGE_CODE }}",
+      autoclose: true,
+      todayHighlight: true,
+    });
+});
+</script>
+{% endblock %}
